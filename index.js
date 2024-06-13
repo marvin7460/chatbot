@@ -13,7 +13,7 @@ const app=express().use(bodyParser.json());
 const token=process.env.CLOUD_API_ACCESS_TOKEN;
 const mytoken=process.env.WEBHOOK_VERIFICATION_TOKEN;//prasath_token
 
-app.listen(process.env.LISTENER_PORT,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("webhook is listening in port " + process.env.LISTENER_PORT );
 });
 
