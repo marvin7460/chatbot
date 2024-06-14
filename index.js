@@ -79,9 +79,9 @@ app.post("/webhook", (req, res) => {
             console.log("From: " + from);
             console.log("Message body: " + msg_body);
 
-            if(msg_body==='ping'){
+            // Evitar procesar mensajes enviados desde tu propio número
+            if (from !== process.env.WA_PHONE_NUMBER_ID && msg_body === 'ping') {
                 send_message();
-            
             }
             res.sendStatus(200);
         } else {
