@@ -4,7 +4,6 @@ import WhatsApp from 'whatsapp'; // Verifica que este import es correcto y el pa
 import 'dotenv/config';
 
 // Importar axios, express y body-parser
-import axios from 'axios';
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -12,6 +11,33 @@ const app = express().use(bodyParser.json());
 
 const token = process.env.CLOUD_API_ACCESS_TOKEN;
 const mytoken = process.env.WEBHOOK_VERIFICATION_TOKEN;
+
+
+// Your test sender phone number
+const wa = new WhatsApp( process.env.WA_PHONE_NUMBER_ID );
+
+// Enter the recipient phone number
+const recipient_number = process.env.WA_PHONE_NUMBER;
+
+async function send_message()
+{
+    try{
+        const sent_text_message = wa.messages.text( { "body" : "pong" }, recipient_number );
+
+        await sent_text_message.then( ( res ) =>
+        {
+            console.log( 'pong');
+        } );
+    }
+    catch( e )
+    {
+        console.log( JSON.stringify( e ) );
+    }
+}
+
+
+
+
 
 // Escuchar en el puerto definido en las variables de entorno
 app.listen(process.env.PORT, () => {
@@ -52,6 +78,11 @@ app.post("/webhook", (req, res) => {
             console.log("Phone number ID: " + phone_no_id);
             console.log("From: " + from);
             console.log("Message body: " + msg_body);
+
+            if(msg_body==='ping'){
+                send_message();
+            
+            }
 
         } else {
             res.sendStatus(404);
