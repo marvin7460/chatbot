@@ -19,10 +19,10 @@ app.listen(process.env.PORT,()=>{
 
 
 // Your test sender phone number
-const wa = new WhatsApp( process.env.SENDER_NUMBER );
+// const wa = new WhatsApp( process.env.SENDER_NUMBER );
 
-// Enter the recipient phone number
-const recipient_number = process.env.WA_PHONE_NUMBER
+// // Enter the recipient phone number
+// const recipient_number = process.env.WA_PHONE_NUMBER
 
 // async function send_message()
 // {
