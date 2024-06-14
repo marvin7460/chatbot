@@ -83,7 +83,7 @@ app.post("/webhook", (req, res) => {
                 send_message();
             
             }
-
+            res.sendStatus(200);
         } else {
             res.sendStatus(404);
         }
