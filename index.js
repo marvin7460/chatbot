@@ -53,28 +53,6 @@ app.post("/webhook", (req, res) => {
             console.log("From: " + from);
             console.log("Message body: " + msg_body);
 
-            axios({
-                method: "POST",
-                url: `https://graph.facebook.com/v19.0/${phone_no_id}/messages?access_token=${token}`,
-                data: {
-                    messaging_product: "whatsapp",
-                    to: from,
-                    text: {
-                        body: `Hi, I'm Prasath. Your message is: ${msg_body}`
-                    }
-                },
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(response => {
-                console.log(response.data);
-                res.sendStatus(200);
-            })
-            .catch(error => {
-                console.error(error);
-                res.sendStatus(500);
-            });
         } else {
             res.sendStatus(404);
         }
