@@ -77,6 +77,12 @@ app.post("/webhook", (req, res) => {
             console.log("From: " + from);
             console.log("Message body: " + msg_body);
 
+            //borrar los primeros 3 ditos 
+            from = from.replace("521", "52");
+            console.log(from);
+
+
+
             // Evitar procesar mensajes enviados desde tu propio número
             if (from !== process.env.WA_PHONE_NUMBER_ID && msg_body === 'ping') {
                 send_message(from);
