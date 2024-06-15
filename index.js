@@ -112,7 +112,7 @@ app.post("/webhook", (req, res) => {
                 send_message(from);
                 res.sendStatus(200);
             }else{
-                wa.messages.interactive( prod_message, from );
+                wa.messages.interactive( reply_btn_message, from );
                 res.sendStatus(200);
             
             }
