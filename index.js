@@ -36,9 +36,6 @@ async function send_message()
 }
 
 
-
-
-
 // Escuchar en el puerto definido en las variables de entorno
 app.listen(process.env.PORT, () => {
     console.log("Webhook is listening on port " + process.env.PORT);
