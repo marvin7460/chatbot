@@ -16,8 +16,32 @@ const mytoken = process.env.WEBHOOK_VERIFICATION_TOKEN;
 // Your test sender phone number
 const wa = new WhatsApp( process.env.WA_PHONE_NUMBER_ID );
 
-// Enter the recipient phone number
-// const recipient_number = process.env.WA_PHONE_NUMBER;
+//interacciones
+const reply_btn_message =
+{
+    "type": "button",
+    "body": {
+        "text": "BUTTON_TEXT"
+    },
+    "action": {
+        "buttons": [
+        {
+            "type": "reply",
+            "reply": {
+            "id": "UNIQUE_BUTTON_ID_1",
+            "title": "BUTTON_TITLE_1"
+            }
+        },
+        {
+            "type": "reply",
+            "reply": {
+            "id": "UNIQUE_BUTTON_ID_2",
+            "title": "BUTTON_TITLE_2"
+            }
+        }
+        ]
+    }
+}
 
 async function send_message( recipient_number )
 {
@@ -86,8 +110,13 @@ app.post("/webhook", (req, res) => {
             // Evitar procesar mensajes enviados desde tu propio número
             if (from !== process.env.WA_PHONE_NUMBER_ID && msg_body === 'ping') {
                 send_message(from);
+                res.sendStatus(200);
+            }else{
+                wa.messages.interactive( prod_message, from );
+                res.sendStatus(200);
+            
             }
-            res.sendStatus(200);
+
         } else {
             res.sendStatus(404);
         }
